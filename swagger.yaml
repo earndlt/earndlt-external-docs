@@ -1,0 +1,145 @@
+openapi: 3.0.0
+paths:
+  /measurment-batch:
+    post:
+      operationId: MeasurerBatchController_create
+      summary: 'Create measurement batch'
+      description: Create measurement batch with given production batch id
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeasurementBatchCreateDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeasurementBatchResponse'
+info:
+  title: External API
+  description: Public API Documentation
+  version: '1.0'
+  contact: {}
+tags: []
+servers: []
+components:
+  securitySchemes:
+    Authorization:
+      scheme: bearer
+      bearerFormat: API Key
+      type: http
+      description: Use company api key
+  schemas:
+    MeasurementBatchResponse:
+      type: object
+      properties:
+        response:
+          type: string
+    MeasurementBatchCreateDto:
+      type: object
+      properties:
+        productionBatchId:
+          type: string
+        standards:
+          type: array
+          items:
+            $ref: '#/components/schemas/StandardDto'
+        metadata:
+          type: array
+          items:
+            type: object
+      required:
+        - productionBatchId
+        - standards
+    StandardDto:
+      type: object
+      properties:
+        type:
+          enum:
+            - redII
+            - ogci
+            - ngsi
+            - tfs
+        carbonIntensity:
+          type: object
+          properties:
+            value:
+              type: integer
+            unitOfMeasurement:
+              enum: ['g/MMBtu', 'kg/MMBtu', 'MT/MMBtu']
+        metadata:
+          type: array
+          items:
+            type: object
+        consumption:
+          type: object
+          properties:
+            value:
+              type: number
+            unitOfMeasurement: 
+              type: string
+        emissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Emission'        
+    Emission:
+      type: object
+      properties:
+        type:
+          enum: [co2, ch4, n20, grid]
+        value: 
+          type: number
+        unitOfMeasurement:
+          enum: ['g/MMBtu', 'kg/MMBtu', 'MT/MMBtu']
+        carbonIntesity: 
+          type: object
+          properties:
+            value:
+              type: number
+            unitOfMeasurement:
+              enum: ['g/MMBtu', 'kg/MMBtu', 'MT/MMBtu']
+            factor:
+              enum: [AR4 100-year, EPA eGRID 2023]
+        methodologyType:
+          enum: [Measured, Estimated, MeasurementInformed]
+          example: Measured
+        methodology:
+          type: string
+          example: "GHGRP estimates of N2O intensity for year 202X applied to 202X [measurer]"
+        source:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            measurementTechnology:
+              type: string
+            frequency:
+              enum: [continuous, annual, quarterly]
+            sensitivity:
+              type: object
+              properties:
+                value:
+                  type: number
+                unitOfMeasurement:
+                  enum: [check]
+                published_performance:
+                  type: string
+              example:
+                value: 42
+                unitOfMeasurement: check
+                published_performance: check
+          example:
+            id: Measurer internal source id [measurer]
+            name: Project Canary sensor XYZ  [measurer]
+            measurementTechnology: check
+            frequency: continuous
+        metadata:
+          type: array
+          items:
+            type: object
