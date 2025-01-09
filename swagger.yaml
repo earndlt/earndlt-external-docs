@@ -22,7 +22,6 @@ paths:
 info:
   title: EarnDLT API Documentation
   description: |
-    ### Introduction
     Data exchange via API is a core component of the EarnDLT product suite. The following documentation provides the necessary details to allow an API engineer to both inject data into the Earn system as well as to extract critical reporting. If you have further questions please contact support@earndlt.com.
 
     ### EarnDLT Minting Flow Overview
@@ -40,8 +39,10 @@ info:
 
     ### Key Terms
     
-    #### Production Source
+    /*:
+    * Callout(Production Source):
     The individual unit or facility that produced the physical energy to be minted on the EarnDLT platform. For example, for Natural Gas, the Production source is the wellhead on a pad where the natural gas is pumped. For Methanol, the Production source is the Facility where the Methanol is produced.
+    */
 
     #### Minting
     The data management process performed on the EarnDLT platform encodes the physical volume of energy produced, the Measured, Reported, and Verified (MRV) emissions data, and related environmental attributes into the tokens that are stored on EarnDLT’s proprietary blockchain. Encoding attributes and data onto a blockchain token is also called tokenization.
