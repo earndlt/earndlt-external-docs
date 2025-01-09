@@ -31,10 +31,10 @@ info:
 
     This API supports the ability for a measuring party, sometimes working on the behalf of a shared client, to return emissions data for the client’s pre-loaded production data. Some key notes about providing this data:
 
-    The Production data uploaded to EarnDLT by the Producer will be the Reconciled Sales Volume and not the Gross Volume Produced.
-    The tokens minted to the EarnDLT blockchain must match the reconciled volumes reported to regulatory entities.
-    The final number of MMBtus minted on the EarnDLT platform will be available 60-90 days after the Natural Gas is pulled from the well.
-    One EarnDLT Natural Gas token represents one MMBtu produced from one Well.
+    - The Production data uploaded to EarnDLT by the Producer will be the Reconciled Sales Volume and not the Gross Volume Produced.
+    - The tokens minted to the EarnDLT blockchain must match the reconciled volumes reported to regulatory entities.
+    - The final number of MMBtus minted on the EarnDLT platform will be available 60-90 days after the Natural Gas is pulled from the well.
+    - One EarnDLT Natural Gas token represents one MMBtu produced from one Well.
 
     Oftentimes, the reconciled sales volumes required by the platform are available only at the site or pad level and not the more precise well level. To address this issue, EarnDLT recommends taking the pad-level reconciled volumes and allocating MMBtus to each well within the pad based on the proportion of total MMTBus produced.
 
