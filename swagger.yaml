@@ -38,8 +38,9 @@ info:
 
     Oftentimes, the reconciled sales volumes required by the platform are available only at the site or pad level and not the more precise well level. To address this issue, EarnDLT recommends taking the pad-level reconciled volumes and allocating MMBtus to each well within the pad based on the proportion of total MMTBus produced.
 
-    #### Key Terms
-    Production Source
+    ### Key Terms
+    
+    #### Production Source
     The individual unit or facility that produced the physical energy to be minted on the EarnDLT platform. For example, for Natural Gas, the Production source is the wellhead on a pad where the natural gas is pumped. For Methanol, the Production source is the Facility where the Methanol is produced.
 
     #### Minting
