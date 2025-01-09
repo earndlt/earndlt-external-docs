@@ -27,7 +27,7 @@ info:
 
     ### EarnDLT Minting Flow Overview
 
-    ![Minting Flow](https://github.com/earndlt/earndlt-external-docs/blob/main/mintingFlow.jpeg)
+    ![Minting Flow](https://raw.githubusercontent.com/earndlt/earndlt-external-docs/main/mintingFlow.jpeg)
 
     This API supports the ability for a measuring party, sometimes working on the behalf of a shared client, to return emissions data for the client’s pre-loaded production data. Some key notes about providing this data:
 
