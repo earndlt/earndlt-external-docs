@@ -39,10 +39,8 @@ info:
 
     ### Key Terms
     
-    /*:
-    * Callout(Production Source):
+    #### Production Source
     The individual unit or facility that produced the physical energy to be minted on the EarnDLT platform. For example, for Natural Gas, the Production source is the wellhead on a pad where the natural gas is pumped. For Methanol, the Production source is the Facility where the Methanol is produced.
-    */
 
     #### Minting
     The data management process performed on the EarnDLT platform encodes the physical volume of energy produced, the Measured, Reported, and Verified (MRV) emissions data, and related environmental attributes into the tokens that are stored on EarnDLT’s proprietary blockchain. Encoding attributes and data onto a blockchain token is also called tokenization.
