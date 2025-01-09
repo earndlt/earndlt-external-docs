@@ -20,8 +20,39 @@ paths:
               schema:
                 $ref: '#/components/schemas/MeasurementBatchResponse'
 info:
-  title: External API
-  description: Public API Documentation
+  title: EarnDLT API Documentation
+  description: |
+    ### Introduction
+    Data exchange via API is a core component of the EarnDLT product suite. The following documentation provides the necessary details to allow an API engineer to both inject data into the Earn system as well as to extract critical reporting. If you have further questions please contact support@earndlt.com.
+
+    ### EarnDLT Minting Flow Overview
+
+    ![Minting Flow](https://github.com/earndlt/earndlt-external-docs/blob/main/mintingFlow.jpeg)
+
+    This API supports the ability for a measuring party, sometimes working on the behalf of a shared client, to return emissions data for the client’s pre-loaded production data. Some key notes about providing this data:
+
+    The Production data uploaded to EarnDLT by the Producer will be the Reconciled Sales Volume and not the Gross Volume Produced.
+    The tokens minted to the EarnDLT blockchain must match the reconciled volumes reported to regulatory entities.
+    The final number of MMBtus minted on the EarnDLT platform will be available 60-90 days after the Natural Gas is pulled from the well.
+    One EarnDLT Natural Gas token represents one MMBtu produced from one Well.
+
+    Oftentimes, the reconciled sales volumes required by the platform are available only at the site or pad level and not the more precise well level. To address this issue, EarnDLT recommends taking the pad-level reconciled volumes and allocating MMBtus to each well within the pad based on the proportion of total MMTBus produced.
+
+    #### Key Terms
+    Production Source
+    The individual unit or facility that produced the physical energy to be minted on the EarnDLT platform. For example, for Natural Gas, the Production source is the wellhead on a pad where the natural gas is pumped. For Methanol, the Production source is the Facility where the Methanol is produced.
+
+    #### Minting
+    The data management process performed on the EarnDLT platform encodes the physical volume of energy produced, the Measured, Reported, and Verified (MRV) emissions data, and related environmental attributes into the tokens that are stored on EarnDLT’s proprietary blockchain. Encoding attributes and data onto a blockchain token is also called tokenization.
+
+    #### Batch
+    The EarnDLT object represents the physical volume of energy produced for the period of time to be minted into a digital token. For an example from Natural Gas, a Batch could represent the energy produced in MMBtus from the wellheads of 20 pads from November 1 to November 30, 2023. Each token can always be traced back to its original minting batch regardless of the number of times the token has been bought and sold.
+
+    #### Asset
+    The generalized attribute name for a token on the EarnDLT platform. An asset represents the emissions data for a single production source for a period of time within a batch.
+
+    #### Pollutant
+    The generalized attribute name that identifies any fugitive Greenhouse Gas emissions measured at the Production Source. Commonly, the measurement will include the mass of the GHG emission and a calculation of the intensity of the emission based on a specified standard. For natural gas, the main pollutant will be methane (CH4). The pollutant object would contain the methane mass and methane intensity. One production source can have multiple measured pollutants.
   version: '1.0'
   contact: {}
 tags: []
