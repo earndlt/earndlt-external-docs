@@ -1,6 +1,6 @@
 openapi: 3.0.0
 paths:
-  /measurment-batch:
+  /measurement-batch:
     post:
       operationId: MeasurerBatchController_create
       summary: 'Create measurement batch'
@@ -106,13 +106,6 @@ components:
           type: array
           items:
             type: object
-        consumption:
-          type: object
-          properties:
-            value:
-              type: number
-            unitOfMeasurement: 
-              type: string
         emissions:
           type: array
           items:
