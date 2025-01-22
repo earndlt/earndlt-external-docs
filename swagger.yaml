@@ -80,6 +80,7 @@ components:
           items:
             $ref: '#/components/schemas/StandardDto'
         metadata:
+          description: "Custom data associated to the production batch"
           type: array
           items:
             type: object
@@ -96,6 +97,7 @@ components:
             - ngsi
             - tfs
         carbonIntensity:
+          description: "The aggregate of all the pollutants for a given well"
           type: object
           properties:
             value:
@@ -103,6 +105,7 @@ components:
             unitOfMeasurement:
               enum: ['g/MMBtu', 'kg/MMBtu', 'MT/MMBtu']
         metadata:
+          description: "Measurer and standard specific custom data"
           type: array
           items:
             type: object
@@ -112,25 +115,31 @@ components:
             $ref: '#/components/schemas/Emission'        
     Emission:
       type: object
+      description: "List of pollutant objects"
       properties:
         type:
-          enum: [co2, ch4, n20, grid]
-        value: 
-          type: number
-        unitOfMeasurement:
-          enum: ['g/MMBtu', 'kg/MMBtu', 'MT/MMBtu']
-        carbonIntesity: 
+          enum: [co2, ch4, n2O, nox]
+          description: "Greenhouse gas pollutant types"
+        pollutantIntensity:
           type: object
           properties:
             value:
               type: number
             unitOfMeasurement:
-              enum: ['g/MMBtu', 'kg/MMBtu', 'MT/MMBtu']
+              enum: [check]
+        carbonIntesity:
+          description: "The carbon intensity for the given well and single pollutant that is being measured"
+          type: object
+          properties:
+            value:
+              type: number
+            unitOfMeasurement:
+              enum: [check]
             factor:
               enum: [AR4 100-year, EPA eGRID 2023]
         methodologyType:
-          enum: [Measured, Estimated, MeasurementInformed]
-          example: Measured
+          enum: [measured estimated measurementInformed]
+          example: measured
         methodology:
           type: string
           example: "GHGRP estimates of N2O intensity for year 202X applied to 202X [measurer]"
@@ -164,6 +173,7 @@ components:
             measurementTechnology: check
             frequency: continuous
         metadata:
+          description: "Measurer and standard specific custom data for the given pollutant and pollutant source."
           type: array
           items:
             type: object
