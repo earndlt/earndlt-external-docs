@@ -154,19 +154,19 @@ components:
               type: string
             frequency:
               enum: [continuous, annual, quarterly]
-            sensitivity:
-              type: object
-              properties:
-                value:
-                  type: number
-                unitOfMeasurement:
-                  enum: [check]
-                published_performance:
-                  type: string
-              example:
-                value: 42
-                unitOfMeasurement: check
-                published_performance: check
+            # sensitivity: // This was used when we thought we were going to be dealing with meters at the wellhead measuring the exact amount
+            #   type: object
+            #   properties:
+            #     value:
+            #       type: number
+            #     unitOfMeasurement:
+            #       enum: [check]
+            #     published_performance:
+            #       type: string
+            #   example:
+            #     value: 42
+            #     unitOfMeasurement: check
+            #     published_performance: check
           example:
             id: Measurer internal source id [measurer]
             name: Project Canary sensor XYZ  [measurer]
