@@ -2,9 +2,13 @@ openapi: 3.0.0
 paths:
   /measurement-batch:
     post:
-      operationId: MeasurerBatchController_create
-      summary: 'Create measurement batch'
-      description: Create measurement batch with given production batch id
+      description: Create a new measurement batch with given production batch id
+      security:
+      - Authorization: []
+      tags:
+        - Measurement Batch
+      operationId: postMeasurementBatch
+      summary: 'Creates measurement batch'
       parameters: []
       requestBody:
         required: true
@@ -14,11 +18,18 @@ paths:
               $ref: '#/components/schemas/MeasurementBatchCreateDto'
       responses:
         '201':
-          description: ''
+          description: 'Successful creation of a measurement batch.'
           content:
             application/json:
+              example: 'Successful creation of a measurement batch.'
               schema:
                 $ref: '#/components/schemas/MeasurementBatchResponse'
+        '400':
+          description: 'Invalid input or missing required fields.'
+        '401':
+          description: 'Unauthorized access. Check your API key.'
+        '500':
+          description: 'Internal server error. Please try again later.'
 info:
   title: EarnDLT API Documentation
   description: |
@@ -55,15 +66,21 @@ info:
     The generalized attribute name that identifies any fugitive Greenhouse Gas emissions measured at the Production Source. Commonly, the measurement will include the mass of the GHG emission and a calculation of the intensity of the emission based on a specified standard. For natural gas, the main pollutant will be methane (CH4). The pollutant object would contain the methane mass and methane intensity. One production source can have multiple measured pollutants.
   version: '1.0'
   contact: {}
-tags: []
+tags:
+  - name: Measurement Batch
+    description: 'Operations related to measurement batch management.'
 servers: []
+  # - url: https://api.earndlt.com/v1
+  #   description: 'Production Server'
+  # - url: https://sandbox.earndlt.com/v1
+  #   description: 'Sandbox Server'
 components:
   securitySchemes:
     Authorization:
+      description: 'Use company api key'
       scheme: bearer
       bearerFormat: API Key
       type: http
-      description: Use company api key
   schemas:
     MeasurementBatchResponse:
       type: object
@@ -75,12 +92,13 @@ components:
       properties:
         productionBatchId:
           type: string
+          example: '49dpse19-6v38-46ec-b971-vv4e5d29373c'
         standards:
           type: array
           items:
             $ref: '#/components/schemas/StandardDto'
         metadata:
-          description: "Custom data associated to the production batch"
+          description: 'Custom data associated to the production batch'
           type: array
           items:
             type: object
@@ -90,22 +108,23 @@ components:
     StandardDto:
       type: object
       properties:
-        type:
-          enum:
-            - redII
-            - ogci
-            - ngsi
-            - tfs
+        standard:
+          type: string
+          enum: [redII, ogci, ngsi, tfs]
+          example: 'redII'
         carbonIntensity:
-          description: "The aggregate of all the pollutants for a given well"
+          description: 'The aggregate of all the pollutants for a given well'
           type: object
           properties:
             value:
               type: integer
+              example: 100
             unitOfMeasurement:
+              type: string
               enum: ['g/MMBtu', 'kg/MMBtu', 'MT/MMBtu']
+              example: 'kg/MMBtu'
         metadata:
-          description: "Measurer and standard specific custom data"
+          description: 'Measurer and standard specific custom data'
           type: array
           items:
             type: object
@@ -114,35 +133,43 @@ components:
           items:
             $ref: '#/components/schemas/Emission'        
     Emission:
+      description: 'List of pollutant objects'
       type: object
-      description: "List of pollutant objects"
       properties:
-        type:
+        pollutant:
+          description: 'Greenhouse gas pollutant types'
+          type: string
           enum: [co2, ch4, n2O, nox]
-          description: "Greenhouse gas pollutant types"
         pollutantIntensity:
           type: object
           properties:
             value:
               type: number
+              example: 2.0
             unitOfMeasurement:
+              type: string
               enum: [check]
-        carbonIntesity:
-          description: "The carbon intensity for the given well and single pollutant that is being measured"
+        carbonIntensity:
+          description: 'The carbon intensity for the given well and single pollutant that is being measured'
           type: object
           properties:
             value:
-              type: number
+              type: integer
+              example: 13
             unitOfMeasurement:
+              type: string
               enum: [check]
             factor:
+              type: string
               enum: [AR4 100-year, EPA eGRID 2023]
+              example: 'AR4 100-year'
         methodologyType:
+          type: string
           enum: [measured estimated measurementInformed]
-          example: measured
+          example: 'measured'
         methodology:
           type: string
-          example: "GHGRP estimates of N2O intensity for year 202X applied to 202X [measurer]"
+          example: 'GHGRP estimates of N2O intensity for year 202X applied to 202X [measurer]'
         source:
           type: object
           properties:
@@ -153,14 +180,15 @@ components:
             measurementTechnology:
               type: string
             frequency:
+              type: string
               enum: [continuous, annual, quarterly]
           example:
-            id: Measurer internal source id [measurer]
-            name: Project Canary sensor XYZ  [measurer]
+            id: M3a5ur3r-ID40-3j29-f6b3-7576944d0069
+            name: hyphenated-lowercase-measurer-name
             measurementTechnology: check
             frequency: continuous
         metadata:
-          description: "Measurer and standard specific custom data for the given pollutant and pollutant source."
+          description: 'Measurer and standard specific custom data for the given pollutant and pollutant source.'
           type: array
           items:
             type: object
