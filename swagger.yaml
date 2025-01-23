@@ -119,7 +119,8 @@ components:
             value:
               type: integer
               example: 100
-            unitOfMeasurement:
+            uom:
+              description: "Unit of Measurement"
               type: string
               enum: ['g/MMBtu', 'kg/MMBtu', 'MT/MMBtu']
               example: 'kg/MMBtu'
@@ -139,14 +140,15 @@ components:
         pollutant:
           description: 'Greenhouse gas pollutant types'
           type: string
-          enum: [co2, ch4, n2O, nox]
+          enum: [co2, ch4, n2O]
         pollutantIntensity:
           type: object
           properties:
             value:
               type: number
               example: 2.0
-            unitOfMeasurement:
+            uom:
+              description: "Unit of Measurement"
               type: string
               enum: [check]
         carbonIntensity:
@@ -156,9 +158,11 @@ components:
             value:
               type: integer
               example: 13
-            unitOfMeasurement:
+            uom:
+              description: "Unit of Measurement"
               type: string
-              enum: [check]
+              enum: ['g/MMBtu', 'kg/MMBtu', 'MT/MMBtu']
+              example: 'kg/MMBtu'
             factor:
               type: string
               enum: [AR4 100-year, EPA eGRID 2023]
